@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
-// crate a route for /market?addresss=1
+{/*crate a route for /market?addresss=1
 app.get('/market/:address', (req, res) => {
   console.log(req.params);
   res.send('Market page');
@@ -34,3 +34,12 @@ app.get('/market', (req, res) => {
 
   res.send(req.query.address);
 })
+*/}
+
+//import router
+import marketRoutes from './routes/marketRoutes';
+import orderRoutes from './routes/orderRoutes';
+
+//routes
+app.use("/api/v1/market", marketRoutes);
+app.use("api/v1//order",orderRoutes)
