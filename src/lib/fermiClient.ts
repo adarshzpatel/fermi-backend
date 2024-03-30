@@ -1,9 +1,10 @@
 import {
-  type AnchorProvider,
+  AnchorProvider,
   BN,
   Program,
   type IdlTypes,
   type IdlAccounts,
+  Wallet,
 } from "@coral-xyz/anchor";
 import { utf8 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 import {
@@ -17,7 +18,7 @@ import {
 import {
   type AccountInfo,
   type Commitment,
-  type Connection,
+  Connection,
   Keypair,
   PublicKey,
   type Signer,
@@ -36,6 +37,57 @@ import {
   checkOrCreateAssociatedTokenAccount,
   fetchTokenBalance,
 } from "../utils/solana/helpers";
+import { COMMITMENT, PROGRAM_ID, RPC_URL } from "../constants";
+
+const postSendTxCallback = ({ txid }: { txid: string }) => {
+  console.log(`[Tx Sent] : ${txid}`);
+};
+
+/**
+ * Creates a connection to the specified RPC URL with the given commitment.
+ * If no RPC URL or commitment is provided, default values will be used.
+ *
+ * @param rpcUrl - The RPC URL to connect to. Defaults to RPC_URL.
+ * @param commitment - The commitment level to use. Defaults to COMMITMENT.
+ * @returns A new Connection object.
+ */
+export function getConnection(
+  rpcUrl: string = RPC_URL,
+  commitment: Commitment = COMMITMENT
+) {
+  return new Connection(rpcUrl, commitment);
+}
+
+/**
+ * Returns an instance of the AnchorProvider using the provided connection and wallet.
+ * @param connection - The connection object for interacting with the Solana blockchain.
+ * @param wallet - The wallet object representing the user's wallet.
+ * @returns An instance of the AnchorProvider.
+ */
+export function getProvider(connection: Connection, wallet: Wallet) {
+  const provider = new AnchorProvider(
+    connection,
+    wallet,
+    AnchorProvider.defaultOptions()
+  );
+  return provider;
+}
+
+/**
+ * Initializes a client for interacting with the OpenBookV2 program.
+ *
+ * @param {Keypair} keypair - The keypair used for signing transactions.
+ * @returns {OpenBookV2Client} The initialized OpenBookV2 client.
+ */
+export function initClient(keypair: Keypair) {
+  const wallet = new Wallet(keypair);
+  const connection = getConnection();
+  const provider = getProvider(connection, wallet);
+  const client = new OpenBookV2Client(provider, new PublicKey(PROGRAM_ID), {
+    postSendTxCallback,
+  });
+  return client;
+}
 
 export type IdsSource = "api" | "static" | "get-program-accounts";
 export type PlaceOrderArgs = IdlTypes<OpenbookV2>["PlaceOrderArgs"];
@@ -67,15 +119,6 @@ export function nameToString(name: number[]): string {
 const BooksideSpace = 90944 + 8;
 const EventHeapSpace = 91280 + 8;
 
-// program id: E6cNbXn2BNoMjXUg7biSTYhmTuyJWQtAnRX1fVPa7y5v
-export const OPENBOOK_PROGRAM_ID = new PublicKey(
-  "E6cNbXn2BNoMjXUg7biSTYhmTuyJWQtAnRX1fVPa7y5v"
-);
-
-export const OPENBOOK_PROGRAM_OG = new PublicKey(
-  "opnb2LAfJYbRMAHHvqjCwQxanZn7ReEHp1k81EohpZb"
-);
-
 export class OpenBookV2Client {
   public program: Program<OpenbookV2>;
 
@@ -86,7 +129,7 @@ export class OpenBookV2Client {
 
   constructor(
     public provider: AnchorProvider,
-    public programId: PublicKey = OPENBOOK_PROGRAM_ID,
+    public programId: PublicKey = new PublicKey(PROGRAM_ID),
     public opts: OpenBookClientOptions = {}
   ) {
     this.program = new Program<OpenbookV2>(IDL, programId, provider);

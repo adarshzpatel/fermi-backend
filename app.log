@@ -1,0 +1,31 @@
+{"level":"info","message":"Websocket server listening on port 8080","timestamp":"2024-03-30T14:21:27.616Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:23:32.658Z"}
+{"level":"info","message":"Client disconnected","timestamp":"2024-03-30T14:23:32.696Z"}
+{"level":"info","message":"[Websocket] Removing client from all market subscriptions","timestamp":"2024-03-30T14:23:32.697Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:23:36.922Z"}
+{"level":"info","message":"[Websocket] Subscribing to market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:23:36.972Z"}
+{"level":"info","message":"[Websocket] Sending asks data to client {\"type\":\"asks\",\"data\":[{\"id\":\"3689348814741910323231\",\"price\":\"200\",\"quantity\":\"1\",\"owner\":\"2zUzjAR3HDftGrYGQ7jEowa7L4iysrnDAgpd6LYokFH7\",\"clientOrderId\":\"3\"}]}","timestamp":"2024-03-30T14:23:38.509Z"}
+{"level":"info","message":"[Websocket] Sending bids data to client {\"type\":\"bids\",\"data\":[{\"id\":\"202914184810805067741\",\"price\":\"10\",\"quantity\":\"1\",\"owner\":\"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe\",\"clientOrderId\":\"9\"}]}","timestamp":"2024-03-30T14:23:38.509Z"}
+{"asks":[{"clientOrderId":"3","id":"3689348814741910323231","owner":"2zUzjAR3HDftGrYGQ7jEowa7L4iysrnDAgpd6LYokFH7","price":"200","quantity":"1"}],"bids":[{"clientOrderId":"9","id":"202914184810805067741","owner":"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe","price":"10","quantity":"1"}],"level":"info","message":"Initial Data Sent :","timestamp":"2024-03-30T14:23:38.510Z"}
+{"level":"info","message":"[Websocket] Creating new subscriptions for market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:23:38.510Z"}
+{"level":"info","message":"[Websocket] Subscribing to account: 2kyzxHNDjyU6PcrgCDMTHyMw7QMyPaNKb34mfsUN6YrR","timestamp":"2024-03-30T14:23:38.510Z"}
+{"level":"info","message":"[Websocket] Subscribing to account: Cpm4HXjihZDWyJKVLN7cSRsBniFXqQLEcjng236hLpAf","timestamp":"2024-03-30T14:23:38.514Z"}
+{"level":"info","message":"Websocket server listening on port 8080","timestamp":"2024-03-30T14:24:37.555Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:26:15.053Z"}
+{"level":"info","message":"Client disconnected","timestamp":"2024-03-30T14:26:15.065Z"}
+{"level":"info","message":"[Websocket] Removing client from all market subscriptions","timestamp":"2024-03-30T14:26:15.065Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:26:17.800Z"}
+{"level":"info","message":"[Websocket] Subscribing to market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:26:17.820Z"}
+{"level":"info","message":"[Websocket] Sending asks data to client {\"type\":\"asks\",\"data\":[]}","timestamp":"2024-03-30T14:26:20.235Z"}
+{"level":"info","message":"[Websocket] Sending bids data to client {\"type\":\"bids\",\"data\":[{\"id\":\"1863121151444664713180\",\"price\":\"100\",\"quantity\":\"1\",\"owner\":\"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe\",\"clientOrderId\":\"10\"},{\"id\":\"1863121151444664713179\",\"price\":\"100\",\"quantity\":\"1\",\"owner\":\"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe\",\"clientOrderId\":\"10\"}]}","timestamp":"2024-03-30T14:26:20.236Z"}
+{"asks":[],"bids":[{"clientOrderId":"10","id":"1863121151444664713180","owner":"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe","price":"100","quantity":"1"},{"clientOrderId":"10","id":"1863121151444664713179","owner":"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe","price":"100","quantity":"1"}],"level":"info","message":"Initial Data Sent :","timestamp":"2024-03-30T14:26:20.237Z"}
+{"level":"info","message":"[Websocket] Creating new subscriptions for market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:26:20.237Z"}
+{"level":"info","message":"Websocket server listening on port 8080","timestamp":"2024-03-30T14:26:47.906Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:26:51.214Z"}
+{"level":"info","message":"Client disconnected","timestamp":"2024-03-30T14:26:51.232Z"}
+{"level":"info","message":"[Websocket] Removing client from all market subscriptions","timestamp":"2024-03-30T14:26:51.233Z"}
+{"level":"info","message":" New Client connected ","timestamp":"2024-03-30T14:26:53.348Z"}
+{"level":"info","message":"[Websocket] Subscribing to market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:26:53.368Z"}
+{"level":"info","message":"[Websocket] Sending asks data to client {\"type\":\"asks\",\"data\":[]}","timestamp":"2024-03-30T14:26:55.351Z"}
+{"level":"info","message":"[Websocket] Sending bids data to client {\"type\":\"bids\",\"data\":[{\"id\":\"1863121151444664713180\",\"price\":\"100\",\"quantity\":\"1\",\"owner\":\"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe\",\"clientOrderId\":\"10\"},{\"id\":\"1863121151444664713179\",\"price\":\"100\",\"quantity\":\"1\",\"owner\":\"HkuXk27jGw3LhHwhEg8Jsjxr2heStUtzQRHdQsMJpLPe\",\"clientOrderId\":\"10\"}]}","timestamp":"2024-03-30T14:26:55.352Z"}
+{"level":"info","message":"[Websocket] Creating new subscriptions for market: CF3Eh6XKgPfTzcTVeeh1LS2yFa5KND2wyjhxUyoMokn4","timestamp":"2024-03-30T14:26:55.352Z"}

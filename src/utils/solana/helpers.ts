@@ -35,6 +35,8 @@ export const SelfTradeBehavior = {
 export const U64_MAX_BN = new BN("18446744073709551615");
 export const I64_MAX_BN = new BN("9223372036854775807").toTwos(64);
 
+
+
 export function bpsToDecimal(bps: number): number {
   return bps / 10000;
 }
