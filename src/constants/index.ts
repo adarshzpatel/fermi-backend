@@ -3,7 +3,7 @@ import { Commitment, Keypair } from "@solana/web3.js";
 export const RPC_URL = "https://devnet.helius-rpc.com/?api-key=5163c3d1-8082-442e-8a15-c27bff3cfabb";
 export const PROGRAM_ID = "DVYGTDbAJVTaXyUksSwAwZr3rw5HmKZsATm6EmSenQAq";
 export const COMMITMENT: Commitment = "processed";
-export const WS_PORT = 8080;
+export const WS_PORT = (process.env.PORT || 8080) as number;
 export const OWNER_KEYPAIR = Keypair.fromSecretKey(
   Uint8Array.from([
     1, 60, 46, 125, 82, 22, 178, 15, 93, 247, 249, 207, 76, 156, 177, 42, 124,
