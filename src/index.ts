@@ -3,6 +3,7 @@ import { OWNER_KEYPAIR, WS_PORT } from "./constants";
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import { initClient, OpenBookV2Client } from "./lib/fermiClient";
 import { parseBookSideAccount } from "./lib/parsers";
+import logger from "./lib/logger";
 
 // Setup Websocket server
 
@@ -16,7 +17,7 @@ const fermiClient = initClient(OWNER_KEYPAIR);
 const solanaConnection = fermiClient.connection;
 
 wss.on("listening", () => {
-  // logger.info(`Websocket server listening on port ${WS_PORT}`);
+  logger.info(`Websocket server listening on port ${WS_PORT}`);
 });
 
 wss.on("connection", (ws: WebSocket) => {
@@ -39,9 +40,17 @@ wss.on("connection", (ws: WebSocket) => {
   });
 
   ws.on("close", () => {
-    // logger.info("Client disconnected");
+    logger.info("Client disconnected");
     unsubscribeFromMarket(null, ws);
   });
+  ws.on("error", (error) => {
+    logger.error(`Websocket error: ${error}`);
+  });
+});
+
+// add a listener for wss server disconnect / close
+wss.on("close", () => {
+  logger.info("Websocket server closed");
 });
 
 async function subscribeToMarket(
