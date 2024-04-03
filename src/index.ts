@@ -4,6 +4,25 @@ import { AccountInfo, PublicKey } from "@solana/web3.js";
 import { initClient, OpenBookV2Client } from "./lib/fermiClient";
 import { parseBookSideAccount } from "./lib/parsers";
 import logger from "./lib/logger";
+import express from "express";
+
+
+// setup a express server 
+const app = express();
+
+// add required middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.listen(3000, () => {
+  console.log("Express server listening on port 3000");
+});
+
+app.get('/', (req, res) => {
+  console.log('FERMI BACKEND')
+  res.json({ message: 'FERMI BACKEND' })
+})
 
 // Setup Websocket server
 
