@@ -1,7 +1,5 @@
-Websocket testing
+Steps to run 
 
-[] Should update on place bid
-[] Should update on place ask
-[] shuold update on cancel ask
-[] should update on cancel bid
-[] should update on matching
+1. git clone
+2. cd fermi-backend
+3. npm start
