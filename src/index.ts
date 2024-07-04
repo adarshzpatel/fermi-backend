@@ -1,6 +1,7 @@
 import { AccountInfo, PublicKey } from "@solana/web3.js";
 import { OWNER_KEYPAIR, WS_PORT } from "./constants";
 import { OpenBookV2Client, initClient } from "./lib/fermiClient";
+
 import { WebSocket } from "ws";
 import logger from "./lib/logger";
 import { parseBookSideAccount } from "./lib/parsers";
@@ -21,21 +22,21 @@ wss.on("listening", () => {
 });
 
 wss.on("connection", (ws: WebSocket) => {
-  // logger.info(" New Client connected ");
+  logger.info(" New Client connected ");
 
   ws.on("message", async (message: string) => {
     try {
       const { type, marketAddress } = JSON.parse(message);
 
       if (type === "subscribe") {
-        // logger.info(`[Websocket] Subscribing to market: ${marketAddress}`);
+        logger.info(`[Websocket] Subscribing to market: ${marketAddress}`);
         await subscribeToMarket(marketAddress, ws);
       } else if (type === "unsubscribe") {
-        // logger.info(`[Websocket] Unsubscribing from market: ${marketAddress}`);
+        logger.info(`[Websocket] Unsubscribing from market: ${marketAddress}`);
         await unsubscribeFromMarket(marketAddress, ws);
       }
     } catch (error) {
-      // logger.error(`Error processing message: ${error}`);
+      logger.error(`Error processing message: ${error}`);
     }
   });
 
@@ -74,9 +75,9 @@ async function subscribeToMarket(
     sendDataToSubscribers(marketAddress, "bids", bids);
     
     if (!subscribedMarkets.has(marketAddress)) {
-      // logger.info(
-      //   `[Websocket] Creating new subscriptions for market: ${marketAddress}`
-      // );
+      logger.info(
+        `[Websocket] Creating new subscriptions for market: ${marketAddress}`
+      );
       // Market is not subscribed yet, create new subscriptions
       const bidsSubscriptionId = await subscribeToAccount(
         market.bids,
@@ -107,9 +108,9 @@ async function unsubscribeFromMarket(
     if (subscriptions) {
       subscriptions.delete(ws);
       if (subscriptions.size === 0) {
-        // logger.info(
-        //   `[Websocket] No more clients subscribed to market: ${marketAddress}. Unsubscribing from accounts.`
-        // );
+        logger.info(
+          `[Websocket] No more clients subscribed to market: ${marketAddress}. Unsubscribing from accounts.`
+        );
         // No more clients subscribed to this market, unsubscribe from the accounts
         marketSubscriptions.delete(marketAddress);
         const { bids: bidsSubscriptionId, asks: asksSubscriptionId } =
@@ -121,7 +122,7 @@ async function unsubscribeFromMarket(
       }
     }
   } else {
-    // logger.info("[Websocket] Removing client from all market subscriptions");
+    logger.info("[Websocket] Removing client from all market subscriptions");
     // Remove the client from all market subscriptions
     for (const marketAddress of marketSubscriptions.keys()) {
       await unsubscribeFromMarket(marketAddress, ws);
@@ -137,9 +138,9 @@ async function subscribeToAccount(
 }
 
 async function unsubscribeFromAccount(subscriptionId: number): Promise<void> {
-  // logger.info(
-  //   `[Websocket] Unsubscribing from account with subscription ID: ${subscriptionId}`
-  // );
+  logger.info(
+    `[Websocket] Unsubscribing from account with subscription ID: ${subscriptionId}`
+  );
   solanaConnection.removeAccountChangeListener(subscriptionId);
 }
 
@@ -151,7 +152,7 @@ function sendDataToSubscribers(
   const subscriptions = marketSubscriptions.get(marketAddress);
   if (subscriptions) {
     const jsonData = JSON.stringify({ type: dataType, data });
-    // logger.info(`[Websocket] Sending ${dataType} data to client ${jsonData}`);
+    logger.info(`[Websocket] Sending ${dataType} data to client ${jsonData}`);
     subscriptions.forEach((client) => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(jsonData);
@@ -170,7 +171,7 @@ export async function handleBidsChange(
     accountInfo.data
   );
   const bids = await parseBookSideAccount(data, client);
-  // logger.info(`Bids changed for market: ${marketAddress}`);
+  logger.info(`Bids changed for market: ${marketAddress}`);
   sendDataToSubscribers(marketAddress, "bids", bids);
 }
 
@@ -184,6 +185,6 @@ export async function handleAsksChange(
     accountInfo.data
   );
   const asks = await parseBookSideAccount(data, client);
-  // logger.info(`Asks changed for market: ${marketAddress}`);
+  logger.info(`Asks changed for market: ${marketAddress}`);
   sendDataToSubscribers(marketAddress, "asks", asks);
 }
